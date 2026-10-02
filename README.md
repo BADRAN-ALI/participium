@@ -9,6 +9,54 @@ Citizens can submit geo-located reports with photos, categories, and description
 
 ---
 
+## Screenshots
+
+Screenshots of the running application using local demo accounts and sample reports. Report images use the included demo placeholder.
+
+### Public portal
+
+Browse published reports on the Turin map, filter by category or status, view statistics, and export the report list.
+
+![Participium public portal showing report filters, the map, statistics, and published reports](docs/screenshots/public-portal.png)
+
+<details>
+<summary><strong>Citizen: create a report</strong></summary>
+
+Submit a description, category, location, and photos, with an option to publish anonymously.
+
+![Citizen report form with sample details, a selected file, and the interactive location picker](docs/screenshots/create-report.png)
+
+</details>
+
+<details>
+<summary><strong>Report details, status history, and messaging</strong></summary>
+
+Follow an issue from submission to assignment and work in progress, inspect its location and photos, and exchange messages with the municipal operator.
+
+![Report detail showing its location, demo image, status history, and citizen-operator conversation](docs/screenshots/report-detail.png)
+
+</details>
+
+<details>
+<summary><strong>Municipal operator dashboard</strong></summary>
+
+Review pending reports, assign them for handling, and update the status of reports in the operator's category.
+
+![Operator dashboard with a pending report and reports in progress and resolved](docs/screenshots/operator-dashboard.png)
+
+</details>
+
+<details>
+<summary><strong>Administrator: user management</strong></summary>
+
+Manage user roles, operator categories, account activity, and email notification preferences.
+
+![Administrator user management panel displaying the citizen, operator, and administrator demo accounts](docs/screenshots/admin-users.png)
+
+</details>
+
+---
+
 ## Features
 
 ### Citizen
@@ -173,11 +221,9 @@ Docker users can alternatively use Docker Desktop or Docker Engine with Docker C
 ## 1. Clone the Repository
 
 ```bash
-git clone <YOUR-GITHUB-REPOSITORY-URL>
+git clone https://github.com/BADRAN-ALI/participium.git
 cd participium
 ```
-
-Replace `<YOUR-GITHUB-REPOSITORY-URL>` with the repository URL after publishing it.
 
 ---
 
@@ -493,4 +539,3 @@ The repository retains:
 - project documentation
 
 ---
-
