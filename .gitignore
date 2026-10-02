@@ -1,0 +1,33 @@
+# IDE/editor
+.idea/
+.vscode/
+
+# Python
+**/.venv/
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+.coverage
+htmlcov/
+src/backend/reports/
+
+# JavaScript
+**/node_modules/
+**/dist/
+
+# Environment / secrets
+.env
+**/.env
+!**/.env.example
+
+# Runtime data
+**/instance/
+src/backend/participium/static/uploads/
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs / OS
+*.log
+.DS_Store
+Thumbs.db

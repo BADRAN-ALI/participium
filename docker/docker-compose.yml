@@ -1,0 +1,69 @@
+services:
+  database:
+    image: mysql:8
+    container_name: participium-database
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-participium}
+      MYSQL_USER: ${MYSQL_USER:-participium}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-participium_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          mysql -h 127.0.0.1 -u${MYSQL_USER:-participium}
+          -p${MYSQL_PASSWORD:-participium_password}
+          ${MYSQL_DATABASE:-participium} -e "SELECT 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/backend.Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: >-
+        mysql+pymysql://${MYSQL_USER:-participium}:${MYSQL_PASSWORD:-participium_password}@database:3306/${MYSQL_DATABASE:-participium}?autocommit=true
+      FRONTEND_ORIGIN: http://localhost:5173
+      AUTO_INIT_DB: "true"
+      BOOTSTRAP_REFERENCE_DATA: "true"
+      BOOTSTRAP_DEMO_DATA: "true"
+      SECRET_KEY: ${SECRET_KEY:-change-me-for-local-development}
+      FLASK_ENV: development
+      HOST: 0.0.0.0
+      PORT: "5050"
+      EXPOSE_VERIFICATION_LINKS: "true"
+    ports:
+      - "5050:5050"
+    volumes:
+      - ../src/backend:/usr/src/app
+      - backend-instance:/usr/src/app/instance
+      - backend-media:/usr/src/app/participium/static/uploads
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/frontend.Dockerfile
+    environment:
+      VITE_API_BASE_URL: http://localhost:5050/api/v1
+      VITE_BACKEND_BASE_URL: http://localhost:5050
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../src/frontend:/usr/src/app
+      - frontend-node-modules:/usr/src/app/node_modules
+
+volumes:
+  mysql-data:
+  backend-instance:
+  backend-media:
+  frontend-node-modules:
