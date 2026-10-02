@@ -494,8 +494,3 @@ The repository retains:
 
 ---
 
-## License / Usage
-
-This repository is presented as a portfolio copy of a collaborative academic Software Engineering project.
-
-Reuse or redistribution should respect the rights of the original contributors and any applicable university or course rules.
